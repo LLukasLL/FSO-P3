@@ -6,7 +6,8 @@ const url = `mongodb+srv://lukasmichaelfischer:${password}@clusterlf.zovaiyp.mon
 console.log('connecting to', url)
 
 mongoose.connect(url)
-  .then(result => {
+  // eslint-disable-next-line no-unused-vars
+  .then(_result => {
     console.log('connected to MongoDB')
   })
   .catch((error) => {
@@ -15,16 +16,16 @@ mongoose.connect(url)
 
 
 const personSchema = new mongoose.Schema({
-    name: String,
-    number: String,
+  name: String,
+  number: String,
 })
 
 personSchema.set('toJSON', {
-  transform: (document, returnedObject) => {
+  transform: (_document, returnedObject) => {
     returnedObject.id = returnedObject._id.toString()
     delete returnedObject._id
     delete returnedObject.__v
   }
 })
-  
-  module.exports = mongoose.model('Person', personSchema)
+
+module.exports = mongoose.model('Person', personSchema)
